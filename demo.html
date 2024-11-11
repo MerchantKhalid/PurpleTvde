@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      /* Basic Styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      /* Car Listing Grid */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-around;
+      }
+      .car-card {
+        width: calc(33.333% - 20px);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+      /* Centered Modal Styling */
+      .car-details-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .car-details-content {
+        background: white;
+        color: #333;
+        border-radius: 10px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        overflow: hidden;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #333;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Swiper for Images */
+      .swiper-container {
+        width: 100%;
+        max-width: 100%;
+        height: 250px;
+        margin-bottom: 20px;
+      }
+      .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      /* Information Section */
+      .info-section {
+        width: 100%;
+        text-align: left;
+        padding: 0 10px;
+      }
+      .info-section h3 {
+        font-size: 20px;
+        color: #2c3e50;
+        margin: 10px 0;
+      }
+      .info-section p {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .whatsapp-button {
+        background-color: #25d366;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100%;
+      }
+      .whatsapp-button:hover {
+        background-color: #128c7e;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .car-card {
+          width: 100%;
+        }
+        .swiper-container {
+          height: 200px;
+        }
+        .car-details-content {
+          width: 90%;
+        }
+        .info-section h3 {
+          font-size: 18px;
+        }
+        .info-section p {
+          font-size: 14px;
+        }
+        .whatsapp-button {
+          font-size: 16px;
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="heading">Vehicles for Sale</h1>
+    </header>
+
+    <div class="container">
+      <div class="car-listing">
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/citroen/citIm.jpeg" alt="Citroen EC-4" />
+          <h3>Citroen EC-4</h3>
+          <p class="price">€16,496</p>
+          <p>Used Car - 2022 - Automatic - 10,850 km</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Car Details Modal -->
+    <div id="car-details-modal" class="car-details-modal">
+      <div class="car-details-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+
+        <!-- Swiper Gallery for Images -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="image/citroen/im (1).jpeg" alt="Exterior View" />
+            </div>
+            <div class="swiper-slide">
+              <img src="image/citroen/im (11).jpeg" alt="Interior View" />
+            </div>
+            <div class="swiper-slide">
+              <img src="image/citroen/im (5).jpeg" alt="Dashboard View" />
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="info-section">
+          <h3>Vehicle Information</h3>
+          <p><strong>Make & Model:</strong> Citroen EC-4</p>
+          <p><strong>Year:</strong> 2022</p>
+          <p><strong>Mileage:</strong> 10,850 km</p>
+          <p><strong>Price:</strong> €16,496</p>
+          <p><strong>Transmission:</strong> Automatic</p>
+          <p><strong>Power:</strong> 100 kW (136 hp)</p>
+          <p>
+            <strong>Key Features:</strong> ABS, Traction Control, Airbags,
+            Electric Motor
+          </p>
+        </div>
+
+        <button
+          id="whatsapp-btn"
+          class="whatsapp-button"
+          onclick="sendWhatsAppMessage()"
+        >
+          Send WhatsApp Message
+        </button>
+      </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        loop: true,
+      });
+
+      function openModal(carId) {
+        document.getElementById('car-details-modal').style.display = 'flex';
+      }
+      function closeModal() {
+        document.getElementById('car-details-modal').style.display = 'none';
+      }
+
+      function sendWhatsAppMessage() {
+        const message = `I am interested in the Citroen EC-4.`;
+        const whatsappUrl = `https://wa.me/+351920102458?text=${encodeURIComponent(
+          message
+        )}`;
+        window.open(whatsappUrl, '_blank');
+      }
+
+      window.onclick = function (event) {
+        if (event.target === document.getElementById('car-details-modal')) {
+          closeModal();
+        }
+      };
+    </script>
+  </body>
+</html>

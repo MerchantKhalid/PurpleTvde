@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      /* Car Listing Grid */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .car-card {
+        width: calc(33.333% - 20px); /* 3 cars per row */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+      }
+
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        max-width: 800px;
+        width: 100%;
+        border-radius: 8px;
+      }
+      .close-btn {
+        float: right;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+      .gallery {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .gallery img {
+        width: 100px;
+        height: 80px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Vehicles for <span>Sell</span></h1>
+
+      <!-- Car Listing Section -->
+      <div class="car-listing">
+        <!-- Car Card Example (Repeat for each car) -->
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/p5008_U.jpg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <!-- Repeat the above block for other cars -->
+      </div>
+    </div>
+
+    <!-- Modals for Car Details -->
+    <div id="car1" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('car1')">&times;</span>
+        <h1>Citeron EC-4 - €17,300</h1>
+
+        <!-- Basic Details Section -->
+        <div class="details-section">
+          <h2>Basic Details</h2>
+          <p><strong>Make & Model:</strong> Citeron EC-4</p>
+          <p><strong>Year:</strong> 2020</p>
+          <p><strong>Mileage:</strong> 194,441 km</p>
+          <p><strong>Transmission:</strong> Automatic</p>
+          <p><strong>Fuel Type:</strong> Diesel</p>
+          <p><strong>Color:</strong> White</p>
+        </div>
+
+        <!-- Photos Gallery Section -->
+        <div class="details-section">
+          <h2>Photo Gallery</h2>
+          <div class="gallery">
+            <img src="image/citroen/im (1).jpeg" alt="Car Photo 1" />
+            <img src="image/citroen/im (2).jpeg" alt="Car Photo 2" />
+            <img src="image/citroen/im (3).jpeg" alt="Car Photo 3" />
+            <img src="image/citroen/im (4).jpeg" alt="Car Photo 4" />
+            <img src="image/citroen/im (5).jpeg" alt="Car Photo 4" />
+            <img src="image/citroen/im (6).jpeg" alt="Car Photo 4" />
+            <img src="image/citroen/im (7).jpeg" alt="Car Photo 4" />
+          </div>
+        </div>
+
+        <!-- More sections (Condition, Features, etc.) can be added here -->
+      </div>
+    </div>
+
+    <!-- Repeat modal structure for each car (car2, car3, etc.), changing the id attribute accordingly -->
+
+    <script>
+      // JavaScript to handle opening and closing modals
+      function openModal(id) {
+        document.getElementById(id).style.display = 'block';
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+      }
+
+      // Close modal if user clicks outside the content
+      window.onclick = function (event) {
+        let modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

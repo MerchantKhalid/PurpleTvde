@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      /* Car Listing Grid */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .car-card {
+        width: calc(33.333% - 20px); /* 3 cars per row */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+      }
+
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Ensure it is above other elements */
+      }
+      .modal-content {
+        background: white;
+        padding: 20px;
+        max-width: 800px;
+        width: 80%; /* Adjust width as necessary */
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      .close-btn {
+        font-size: 1.5em;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+
+      /* Full-Screen Image Modal */
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .fullscreen-modal img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Vehicles for <span>Sell</span></h1>
+
+      <!-- Car Listing Section -->
+      <div class="car-listing">
+        <!-- Car Card Example (Repeat for each car) -->
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/p5008_U.jpg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <div class="car-card" onclick="openModal('car2')">
+          <img src="image/p5008_U.jpg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <div class="car-card" onclick="openModal('car3')">
+          <img src="image/p5008_U.jpg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Car Details -->
+
+    <div id="car2" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('car2')">&times;</span>
+        <h1>Citeron C3 - €15,000</h1>
+        <div class="details-section">
+          <h2>Basic Details</h2>
+          <p><strong>Make & Model:</strong> Citeron C3</p>
+          <p><strong>Year:</strong> 2021</p>
+          <p><strong>Mileage:</strong> 120,000 km</p>
+          <p><strong>Transmission:</strong> Automatic</p>
+          <p><strong>Fuel Type:</strong> Petrol</p>
+          <p><strong>Color:</strong> Red</p>
+        </div>
+        <div class="details-section">
+          <h2>Photo Gallery</h2>
+          <div class="gallery">
+            <img
+              src="image/citroen/c3-1.jpg"
+              alt="Car Photo 1"
+              onclick="openFullscreen('image/citroen/c3-1.jpg')"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Screen Image Modal -->
+    <div
+      id="fullscreen-modal"
+      class="fullscreen-modal"
+      onclick="closeFullscreen()"
+    >
+      <img id="fullscreen-image" src="" alt="Fullscreen Image" />
+    </div>
+
+    <script>
+      // Open and Close Modal Functions
+      function openModal(carId) {
+        const modal = document.getElementById(carId);
+        modal.style.display = 'flex'; // Display modal in center
+      }
+
+      function closeModal(carId) {
+        const modal = document.getElementById(carId);
+        modal.style.display = 'none'; // Hide modal
+      }
+
+      // Open Fullscreen Image
+      function openFullscreen(imageSrc) {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        const fullscreenImage = document.getElementById('fullscreen-image');
+        fullscreenImage.src = imageSrc;
+        fullscreenModal.style.display = 'flex'; // Show fullscreen modal
+      }
+
+      // Close Fullscreen Image
+      function closeFullscreen() {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        fullscreenModal.style.display = 'none'; // Hide fullscreen modal
+      }
+
+      // Close modal if user clicks outside the content
+      window.onclick = function (event) {
+        let modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

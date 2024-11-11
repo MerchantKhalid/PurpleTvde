@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      /* Car Listing Grid with Flexbox */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .car-card {
+        width: calc(33.333% - 20px);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+      /* Car Details Modal */
+      .car-details-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .car-details-content {
+        background: white;
+        color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        width: 70%;
+        max-width: 900px;
+        overflow-y: auto;
+      }
+      .car-details-content h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      .car-details-content p {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+      .whatsapp-button {
+        background-color: #25d366;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .whatsapp-button:hover {
+        background-color: #128c7e;
+      }
+
+      .details-section {
+        margin-bottom: 20px;
+      }
+      .details-section h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+      .details-section p {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <a href="#" class="logo"> <span>Purple</span>Frontier </a>
+
+        <nav class="navbar">
+          <a href="index.html">Home</a>
+          <a
+            href="https://drive.google.com/drive/u/6/folders/1G6-b8K0BorbI_rp-XCJJFlh6XuicYtQK "
+            >Vehicles</a
+          >
+
+          <a href="About.html">About</a>
+          <a href="Contact.html">Contact</a>
+        </nav>
+
+        <!-- <div id="login-btn">
+            <button class="btn">login</button>
+            <i class="far fa-user"></i>
+          </div> -->
+      </section>
+    </header>
+    <div class="container">
+      <h1 class="heading">Vehicles for Sale</h1>
+
+      <!-- Car Listing Section -->
+      <div class="car-listing">
+        <!-- Car Card 1 -->
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/citroen/citIm.jpeg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2021 - Automatic - 194,441km</p>
+        </div>
+        <div class="car-card" onclick="openModal('car2')">
+          <img src="image/citroen/corsa (2).jpeg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2021 - Automatic - 194,441km</p>
+        </div>
+        <div class="car-card" onclick="openModal('car3')">
+          <img src="image/citroen/opelMO.jpeg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2021 - Automatic - 194,441km</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Car Details Modal -->
+    <div id="car-details-modal" class="car-details-modal">
+      <div class="car-details-content">
+        <h2 id="car-title">Car Title</h2>
+
+        <!-- Concise Vehicle Information -->
+        <div class="details-section">
+          <h3>Vehicle Info</h3>
+          <p id="make-model">Make: [Insert Make], Model: [Insert Model]</p>
+          <p id="mileage-price">
+            Mileage: [Insert Mileage], Price: [Insert Price]
+          </p>
+          <p id="title-status">Title Status: [Insert Title Status]</p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="details-section">
+          <h3>Key Features</h3>
+          <p id="engine-transmission">
+            Engine: [Insert Engine], Transmission: [Insert Transmission]
+          </p>
+          <p id="fuel-efficiency">Fuel Efficiency: [Insert Efficiency]</p>
+          <p id="safety-features">Safety Features: [Insert Features]</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="details-section">
+          <h3>Contact</h3>
+          <p id="contact-phone">Phone: [Insert Phone Number]</p>
+          <p id="contact-email">Email: [Insert Email Address]</p>
+        </div>
+
+        <button
+          id="whatsapp-btn"
+          class="whatsapp-button"
+          onclick="sendWhatsAppMessage()"
+        >
+          Send WhatsApp Message
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Car Data
+      const carDetails = {
+        car1: {
+          title: 'Citeron EC-4',
+          make: 'Citeron',
+          model: 'EC-4',
+          year: '2021',
+          vin: 'X1234Y5678',
+          mileage: '194,441 km',
+          price: '€17,300',
+          titleStatus: 'Clean',
+          engine: 'Electric',
+          transmission: 'Automatic',
+          fuelEfficiency: '300 km range',
+          safetyFeatures: 'Airbags, ABS, Traction Control',
+          contactPhone: '+351920102458',
+          contactEmail: 'info@carsales.com',
+        },
+        car2: {
+          title: 'Peugeot 2008 EC-4',
+          make: 'Peugeot',
+          model: 'EC-4',
+          year: '2021',
+          vin: 'X1234Y5678',
+          mileage: '194,441 km',
+          price: '€17,300',
+          titleStatus: 'Clean',
+          engine: 'Electric',
+          transmission: 'Automatic',
+          fuelEfficiency: '300 km range',
+          safetyFeatures: 'Airbags, ABS, Traction Control',
+          contactPhone: '+351920102458',
+          contactEmail: 'info@carsales.com',
+        },
+        car3: {
+          title: 'Opel Mokka',
+          make: 'Opel',
+          model: 'EC-4',
+          year: '2021',
+          vin: 'X1234Y5678',
+          mileage: '194,441 km',
+          price: '€17,300',
+          titleStatus: 'Clean',
+          engine: 'Electric',
+          transmission: 'Automatic',
+          fuelEfficiency: '300 km range',
+          safetyFeatures: 'Airbags, ABS, Traction Control',
+          contactPhone: '+351920102458',
+          contactEmail: 'info@carsales.com',
+        },
+      };
+
+      // Open Modal with Details
+      function openModal(carId) {
+        const car = carDetails[carId];
+        document.getElementById('car-title').innerText = car.title;
+        document.getElementById(
+          'make-model'
+        ).innerText = `Make: ${car.make}, Model: ${car.model}`;
+        document.getElementById(
+          'mileage-price'
+        ).innerText = `Mileage: ${car.mileage}, Price: ${car.price}`;
+        document.getElementById(
+          'title-status'
+        ).innerText = `Title Status: ${car.titleStatus}`;
+        document.getElementById(
+          'engine-transmission'
+        ).innerText = `Engine: ${car.engine}, Transmission: ${car.transmission}`;
+        document.getElementById(
+          'fuel-efficiency'
+        ).innerText = `Fuel Efficiency: ${car.fuelEfficiency}`;
+        document.getElementById(
+          'safety-features'
+        ).innerText = `Safety Features: ${car.safetyFeatures}`;
+        document.getElementById(
+          'contact-phone'
+        ).innerText = `Phone: ${car.contactPhone}`;
+        document.getElementById(
+          'contact-email'
+        ).innerText = `Email: ${car.contactEmail}`;
+
+        // Open modal
+        document.getElementById('car-details-modal').style.display = 'flex';
+      }
+
+      // Close modal when clicked outside the content
+      window.onclick = function (event) {
+        let modal = document.getElementById('car-details-modal');
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+
+      // WhatsApp Message Function
+      function sendWhatsAppMessage() {
+        const car = carDetails['car1'];
+        const message = `I M Interested in the ${car.title}. More details: ${car.contactPhone}`;
+        const whatsappUrl = `https://wa.me/+351920102458?text=${encodeURIComponent(
+          message
+        )}`;
+        window.open(whatsappUrl, '_blank');
+      }
+    </script>
+  </body>
+</html>

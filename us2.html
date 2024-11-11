@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      /* Car Listing Grid */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .car-card {
+        width: calc(33.333% - 20px); /* 3 cars per row */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+      }
+
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background: white;
+        padding: 20px;
+        max-width: 800px;
+        width: 100%;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .close-btn {
+        float: right;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+
+      /* Full-Screen Image Modal */
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .fullscreen-modal img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Vehicles for <span>Sell</span></h1>
+
+      <!-- Car Listing Section -->
+      <div class="car-listing">
+        <!-- Car Card Example (Repeat for each car) -->
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/p5008_U.jpg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals for Car Details -->
+    <div id="car1" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('car1')">&times;</span>
+        <h1>Citeron EC-4 - €17,300</h1>
+
+        <!-- Basic Details Section -->
+        <div class="details-section">
+          <h2>Basic Details</h2>
+          <p><strong>Make & Model:</strong> Citeron EC-4</p>
+          <p><strong>Year:</strong> 2020</p>
+          <p><strong>Mileage:</strong> 194,441 km</p>
+          <p><strong>Transmission:</strong> Automatic</p>
+          <p><strong>Fuel Type:</strong> Diesel</p>
+          <p><strong>Color:</strong> White</p>
+        </div>
+
+        <!-- Photos Gallery Section -->
+        <div class="details-section">
+          <h2>Photo Gallery</h2>
+          <div class="gallery">
+            <img
+              src="image/citroen/im (1).jpeg"
+              alt="Car Photo 1"
+              onclick="openFullscreen('image/citroen/im (1).jpeg')"
+            />
+            <img
+              src="image/citroen/im (2).jpeg"
+              alt="Car Photo 2"
+              onclick="openFullscreen('image/citroen/im (2).jpeg')"
+            />
+            <img
+              src="image/citroen/im (3).jpeg"
+              alt="Car Photo 3"
+              onclick="openFullscreen('image/citroen/im (3).jpeg')"
+            />
+            <img
+              src="image/citroen/im (4).jpeg"
+              alt="Car Photo 4"
+              onclick="openFullscreen('image/citroen/im (4).jpeg')"
+            />
+            <img
+              src="image/citroen/im (5).jpeg"
+              alt="Car Photo 5"
+              onclick="openFullscreen('image/citroen/im (5).jpeg')"
+            />
+            <img
+              src="image/citroen/im (6).jpeg"
+              alt="Car Photo 6"
+              onclick="openFullscreen('image/citroen/im (6).jpeg')"
+            />
+            <img
+              src="image/citroen/im (7).jpeg"
+              alt="Car Photo 7"
+              onclick="openFullscreen('image/citroen/im (7).jpeg')"
+            />
+            <img
+              src="image/citroen/im (8).jpeg"
+              alt="Car Photo 8"
+              onclick="openFullscreen('image/citroen/im (8).jpeg')"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Screen Image Modal -->
+    <div
+      id="fullscreen-modal"
+      class="fullscreen-modal"
+      onclick="closeFullscreen()"
+    >
+      <img id="fullscreen-image" src="" alt="Full-Screen Image" />
+    </div>
+
+    <script>
+      // JavaScript to handle opening and closing modals
+      function openModal(id) {
+        document.getElementById(id).style.display = 'block';
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+      }
+
+      // Function to open the full-screen modal with the clicked image
+      function openFullscreen(imageSrc) {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        const fullscreenImage = document.getElementById('fullscreen-image');
+        fullscreenImage.src = imageSrc;
+        fullscreenModal.style.display = 'flex'; // This ensures the modal appears
+      }
+
+      // Function to close the full-screen modal
+      function closeFullscreen() {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        fullscreenModal.style.display = 'none';
+      }
+
+      // Close modal if user clicks outside the content
+      window.onclick = function (event) {
+        let modals = document.querySelectorAll('.modal');
+        modals.forEach((modal) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

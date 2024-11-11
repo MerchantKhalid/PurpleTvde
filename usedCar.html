@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Listings</title>
+    <style>
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .heading {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      /* Car Listing Grid with Flexbox */
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px; /* Adds space between cards */
+      }
+      .car-card {
+        width: calc(33.333% - 20px); /* 3 cards per row, with spacing */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+      }
+      .car-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .car-card h3 {
+        color: #2c3e50;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .price {
+        color: #f39c12;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      .car-card p {
+        margin-top: 10px;
+      }
+
+      /* Full-Screen Image Modal */
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .fullscreen-modal img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Vehicles for Sale</h1>
+
+      <!-- Car Listing Section -->
+      <div class="car-listing">
+        <!-- Car Card 1 -->
+        <div class="car-card" onclick="openModal('car1')">
+          <img src="image/citroen/citIm.jpeg" alt="Citeron EC-4" />
+          <h3>Citeron EC-4</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2021 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <!-- Car Card 2 -->
+        <div class="car-card" onclick="openModal('car2')">
+          <img src="image/citroen/corsa (1).jpeg" alt="Citeron EC-4" />
+          <h3>Opel Mokka</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <!-- Car Card 3 -->
+        <div class="car-card" onclick="openModal('car3')">
+          <img src="image/citroen/corsa (2).jpeg" alt="Citeron EC-4" />
+          <h3>Peugeot 2008</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2021 - Automatic - Electric - 194,441km</p>
+        </div>
+
+        <!-- Car Card 4 -->
+        <div class="car-card" onclick="openModal('car4')">
+          <img src="image/citroen/opelMO.jpeg" alt="Citeron EC4" />
+          <h3>Opel Mokka</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <!-- Car Card 5 -->
+        <div class="car-card" onclick="openModal('car5')">
+          <img src="image/citroen/mokk.jpeg" alt="Citeron EC-4" />
+          <h3>Opel Corsa</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+
+        <!-- Car Card 6 -->
+        <div class="car-card" onclick="openModal('car6')">
+          <img src="image/citroen/citor.jpeg" alt="Citeron EC-4" />
+          <h3>Peugeot 5008</h3>
+          <p class="price">€17,300</p>
+          <p>Used Car - 2020 - Automatic - Diesel - 194,441km</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full-Screen Image Modal -->
+    <div
+      id="fullscreen-modal"
+      class="fullscreen-modal"
+      onclick="closeFullscreen()"
+    >
+      <img id="fullscreen-image" src="" alt="Full-Screen Image" />
+    </div>
+
+    <script>
+      // JavaScript to handle opening and closing modals
+      function openModal(id) {
+        document.getElementById(id).style.display = 'block';
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+      }
+
+      // Function to open the full-screen modal with the clicked image
+      function openFullscreen(imageSrc) {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        const fullscreenImage = document.getElementById('fullscreen-image');
+        fullscreenImage.src = imageSrc;
+        fullscreenModal.style.display = 'flex'; // This ensures the modal appears
+      }
+
+      // Function to close the full-screen modal
+      function closeFullscreen() {
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        fullscreenModal.style.display = 'none'; // Hide the modal when clicked
+      }
+
+      // Close modal if user clicks outside the content
+      window.onclick = function (event) {
+        let fullscreenModal = document.getElementById('fullscreen-modal');
+        if (event.target === fullscreenModal) {
+          closeFullscreen(); // Close the modal if clicked outside the image
+        }
+      };
+    </script>
+  </body>
+</html>
